@@ -1,5 +1,4 @@
 import React from "react";
-
 import { Home } from "./components/Home";
 import { Header } from "./components/Header";
 import { PrestadorServico } from "./components/PrestadorServico";
@@ -44,6 +43,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
+		  <Header goToHome={this.goToHome} />
         {this.chooseScreen()}
       </div>
     );
