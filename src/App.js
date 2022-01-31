@@ -1,9 +1,10 @@
 import React from "react";
 import { AppContainer } from "./components/AppContainer";
+import Clients from "./components/Clients";
 
 class App extends React.Component {
   state = {
-    currentScreem: "home",
+    currentScreen: "home",
   };
 
   goToClient = () => {
@@ -22,7 +23,7 @@ class App extends React.Component {
       case "prestador":
         return;
       case "cliente":
-        return; //Componente cliente
+        return <Clients />;
       default:
         return <AppContainer />;
     }
@@ -31,6 +32,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        
         <button onClick={this.goToService}>Quero ser um ninja</button>
         <button onClick={this.goToClient}>Contratar um ninja</button>
         {this.chooseScreen()}
