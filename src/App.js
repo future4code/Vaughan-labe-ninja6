@@ -3,7 +3,7 @@ import React from "react";
 import { Home } from "./components/Home";
 import { Header } from "./components/Header";
 import { PrestadorServico } from "./components/PrestadorServico";
-import { Clients } from "./components/Clients";
+import  Clients  from "./components/Clients";
 
 
 class App extends React.Component {
@@ -11,6 +11,10 @@ class App extends React.Component {
     currentScreen: "home",
   };
 
+  goToHome = () => {
+	  this.setState({currentScreen: "home"})
+  }
+  
   goToClient = () => {
     this.setState({ currentScreen: "cliente" });
     console.log("clicou no botão para ir no cliente");
