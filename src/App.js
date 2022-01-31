@@ -6,6 +6,7 @@ import { PrestadorServico } from "./components/PrestadorServico";
 import  Clients  from "./components/Clients";
 
 
+
 class App extends React.Component {
   state = {
     currentScreen: "home",
@@ -43,10 +44,6 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Header
-        goToHome={this.goToHome}
-        />
-        
         {this.chooseScreen()}
       </div>
     );
