@@ -1,6 +1,10 @@
 import React from "react";
-import { AppContainer } from "./components/AppContainer";
-import Clients from "./components/Clients";
+
+import { Home } from "./components/Home";
+import { Header } from "./components/Header";
+import { PrestadorServico } from "./components/PrestadorServico";
+import { Clients } from "./components/Clients";
+
 
 class App extends React.Component {
   state = {
@@ -19,22 +23,26 @@ class App extends React.Component {
   chooseScreen = () => {
     switch (this.state.currentScreen) {
       case "home":
-        return <AppContainer />;
+        return <Home goToService={this.goToService}
+		goToClient={this.goToClient}/>;
       case "prestador":
-        return;
+        return <PrestadorServico goToHome={this.goToHome}/>
       case "cliente":
-        return <Clients />;
+
+        return <Clients />
       default:
-        return <AppContainer />;
+        return <Home goToService={this.goToService}
+		goToClient={this.goToClient} />;
     }
   };
 
   render() {
     return (
       <div>
+        <Header
+        goToHome={this.goToHome}
+        />
         
-        <button onClick={this.goToService}>Quero ser um ninja</button>
-        <button onClick={this.goToClient}>Contratar um ninja</button>
         {this.chooseScreen()}
       </div>
     );

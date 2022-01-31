@@ -9,8 +9,8 @@ export class Header extends React.Component  {
       return (
         <div>
           <h1>LabeNinjas</h1>
-          <button OnClick={this.props.goToHome} > Home</button>
-          <button OnClick={this.props.goToCart}>Carrinho</button>
+          <button onClick={this.props.goToHome} > Home</button>
+          <button onClick={this.props.goToCart}>Carrinho</button>
         </div>
       );
     }
