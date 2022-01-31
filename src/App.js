@@ -1,6 +1,7 @@
 import React from "react";
 import { AppContainer } from "./components/AppContainer";
 
+
 class App extends React.Component {
   state = {
     currentScreem: "home",
@@ -31,6 +32,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
+		
         <button onClick={this.goToService}>Quero ser um ninja</button>
         <button onClick={this.goToClient}>Contratar um ninja</button>
         {this.chooseScreen()}
