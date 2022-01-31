@@ -1,4 +1,5 @@
 import React from "react";
+
 import { Home } from "./components/Home";
 import { Header } from "./components/Header";
 import { PrestadorServico } from "./components/PrestadorServico";
@@ -9,11 +10,6 @@ class App extends React.Component {
   state = {
     currentScreen: "home",
   };
-
-  goToHome = () => {
-    this.setState({ currentScreen: "home"})
-    console.log("cliquei no botao home");
-  }
 
   goToClient = () => {
     this.setState({ currentScreen: "cliente" });
@@ -32,6 +28,7 @@ class App extends React.Component {
       case "prestador":
         return <PrestadorServico goToHome={this.goToHome}/>
       case "cliente":
+
         return <Clients />
       default:
         return <Home goToService={this.goToService}
