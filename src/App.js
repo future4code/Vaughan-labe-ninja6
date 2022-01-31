@@ -1,16 +1,11 @@
 import React from "react";
 import { AppContainer } from "./components/AppContainer";
-import { Header } from "./components/Header";
+import Clients from "./components/Clients";
 
 class App extends React.Component {
   state = {
     currentScreen: "home",
   };
-
-  goToHome = () => {
-    this.setState({ currentScreen: "home"})
-    console.log("cliquei no botao home");
-  }
 
   goToClient = () => {
     this.setState({ currentScreen: "cliente" });
@@ -28,7 +23,7 @@ class App extends React.Component {
       case "prestador":
         return;
       case "cliente":
-        return; //Componente cliente
+        return <Clients />;
       default:
         return <AppContainer />;
     }
@@ -37,11 +32,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Header
-        goToHome={this.props.goToHome }
-        />
-        <h1>LabeNinjas</h1>
-        <h3>O talento certo no momento certo</h3>
+        
         <button onClick={this.goToService}>Quero ser um ninja</button>
         <button onClick={this.goToClient}>Contratar um ninja</button>
         {this.chooseScreen()}
