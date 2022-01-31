@@ -20,7 +20,7 @@ class App extends React.Component {
       case "home":
         return <AppContainer />;
       case "prestador":
-        return 
+        return;
       case "cliente":
         return; //Componente cliente
       default:
@@ -31,7 +31,6 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        
         <button onClick={this.goToService}>Quero ser um ninja</button>
         <button onClick={this.goToClient}>Contratar um ninja</button>
         {this.chooseScreen()}
