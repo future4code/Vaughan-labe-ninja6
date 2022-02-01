@@ -25,8 +25,7 @@ const JobCards = styled.div`
 
 export default class Clients extends React.Component {
   state = {
-    jobs: [],
-    jobClicked: false,
+    jobs: []
   };
 
   componentDidMount() {
@@ -35,45 +34,44 @@ export default class Clients extends React.Component {
 
   getAllJobs = () => {
     const url =
-      "https://us-central1-labenu-apis.cloudfunctions.net/labeninjas/jobs";
+      "https://labeninjas.herokuapp.com/jobs";
     const config = {
       headers: {
-        Authorization: "fillipe-correia-vaughan",
+        Authorization: "e2190c39-7930-4db4-870b-bed0e5e4b88e",
       },
     };
     axios
       .get(url, config)
-      .then((response) =>
-        this.setState({ jobs: response.data.result.list })
-      )
-      .catch((error) => console.log(error.message));
+      .then((response) => {
+        this.setState({ 
+          jobs: response.data
+         });
+        console.log(response.data);
+        console.log(this.state.jobs);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
+
   render() {
-    const jobs = this.state.jobs.map((jobs) => {
+    
+    const jobcard = this.state.jobs.map((job) => {
       return (
         <JobCards>
-          <h4>{jobs.title}</h4>
-            <p>{jobs.description}</p>
-            <p>{jobs.price}</p>
-
-
-          {/* {this.renderComponente de detalhe do card()} */}
+          <h1>{job.title}</h1>
+          <p>{job.description}</p>
         </JobCards>
       );
     });
 
-    // let clicked;
-    // if (this.state.jobClicked === true) {
-    //   clicked = <Componente do detalhe do card />;
-    // }
-
     return (
       <div>
         <h1>Lista de Jobs</h1>
-        {jobs}
+        {jobcard}
+        <button onClick={this.getAllJobs}>Atualizar</button>
       </div>
     );
   }
 }
-
