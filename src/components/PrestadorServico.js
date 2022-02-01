@@ -28,7 +28,6 @@ export class PrestadorServico extends Component {
     tiposDePagamentos: [],
     dataCalendario: "",
 
-    servicosCadastrados: [],
   };
 
   manusearTitulo = (event) => {
@@ -44,7 +43,9 @@ export class PrestadorServico extends Component {
   };
 
   manusearFormaPagamento = (event) => {
-    this.setState({ tiposDePagamentos: event.target.value });
+    const novoValor = [...this.state.tiposDePagamentos]
+    novoValor.push(event.target.value)
+    this.setState({ tiposDePagamentos: novoValor });
   };
 
   manusearData = (event) => {
@@ -55,7 +56,7 @@ export class PrestadorServico extends Component {
     const body = {
       title: this.state.titulo,
       description: this.state.descricao,
-      price: this.state.preco,
+      price: Number(this.state.preco),
       paymentMethods: this.state.tiposDePagamentos,
       dueDate: this.state.dataCalendario,
     };
@@ -68,6 +69,13 @@ export class PrestadorServico extends Component {
       })
       .then((response) => {
         console.log(response.data);
+        this.setState({
+        titulo: "",
+        descricao: "",
+        preco: "",
+        dataCalendario: ""
+      })
+      alert("Serviço criado com sucesso!")
       })
       .catch((error) => {
         alert(`Não foi possivel fazer o cadastro, motivo: ${error}`);
@@ -100,7 +108,7 @@ export class PrestadorServico extends Component {
           />
 
           
-            <select
+            <select 
               value={this.state.tiposDePagamentos}
               onChange={this.manusearFormaPagamento}
             >
