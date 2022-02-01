@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import styled from "styled-components";
+import Filtros from "./Filtros";
 // import JobDetails from "./JobDetails";
 
 const JobCards = styled.div`
@@ -71,6 +72,7 @@ export default class Clients extends React.Component {
     return (
       <div>
         <h1>Lista de Jobs</h1>
+        <Filtros/>
         {jobs}
       </div>
     );
