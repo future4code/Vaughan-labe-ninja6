@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import PrestadorServico from "./PrestadorServico";
+
 
 export class Home extends Component {
 
