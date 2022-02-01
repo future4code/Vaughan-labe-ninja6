@@ -1,74 +1,125 @@
-import React from 'react';
+import React from "react";
+import styled from "styled-components";
 
-
-// O nome "card" está somente como exemplo, esperando o produto "card" ser criado.
-
-class Filtros extends React.Component {
-    state = {
-    
-        busca: "",
-        valorMinimo: "",
-        valorMaximo: ""
-        
-    };
-    
-    onChangeAtualizacaoDaBusca=(event) => {
-        this.setState ({
-           busca: event.target.value })
+const FiltrosContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 32px 24px 0 24px;
+`;
+export default class Filtros extends React.Component {
+  state = {
+    //listaDeJobs: [],
+    //listaDosFiltros: [],
+    busca: "",
+    valorMinimo: "",
+    valorMaximo: "",
+    ordem: "",
+  };
+  /*componentDidMount() {
+        this.getJobs()
+        this.filtros()
     }
-    onChangeAtualizacaoDoMinimo=(event) => {
-        this.setState ({
-           valorMinimo: event.target.value })
-    }
-    onChangeAtualizacaoDoMaximo=(event) => {
-        this.setState ({
-           valorMaximo: event.target.value })
-    }
-    
-    filtrar = () => {
-       
-        this.props.produtos = this.props.card.filter(card => {
-        return card.nome.toLowerCase().includes(this.state.busca.toLowerCase())
+    */
+  onChangeAtualizacaoDaBusca = (event) => {
+    this.setState({
+      busca: event.target.value,
+    });
+  };
+  onChangeAtualizacaoDoMinimo = (event) => {
+    this.setState({
+      valorMinimo: event.target.value,
+    });
+  };
+  onChangeAtualizacaoDoMaximo = (event) => {
+    this.setState({
+      valorMaximo: event.target.value,
+    });
+  };
+  onChangeAtualizacaoDaOrdem = (event) => {
+    this.setState({
+      ordem: event.target.value,
+    });
+  };
+  /*getJobs = () => {
+        axios
+        .get(`${BASE_URL}/jobs`, headers)
+        .then((res) => {
+            this.setState({ listaDeJobs: res.data.jobs, listaDosFiltros: res.data.jobs })
         })
-        .filter(card => {
-        return this.state.valorMinimo === "" || card.valor >= this.state.valorMinimo
+        .catch((error) => {
+            alert(error.response.data.message)
         })
-        .filter(card => {
-        return this.state.valorMaximo === "" || card.valor <= this.state.valorMaximo
-        })
-        console.log(this.props.card.length)
     }
-        
-    render() {
-
+    */
+  filtros = () => {
+    this.props.job = this.props.job
+      .filter((job) => {
+        return job.titulo
+          .toLowerCase()
+          .includes(this.state.busca.toLowerCase());
+      })
+      .filter((job) => {
+        return (
+          this.state.valorMinimo === "" || job.valor >= this.state.valorMinimo
+        );
+      })
+      .filter((job) => {
+        return (
+          this.state.valorMaximo === "" || job.valor <= this.state.valorMaximo
+        );
+      })
+      .sort((a, b) => {
+        switch (this.state.ordem) {
+          case "Menor Valor":
+            return a.price - b.price;
+          case "Maior Valor":
+            return b.price - a.price;
+          case "Título":
+            return a.titulo.localeCompare(b.titulo);
+          case "Prazo":
+            return a.dueDate.localeCompare(b.dueDate);
+        }
+      });
+    //this.setState({listaDosFiltros: filtros})
+    console.log(this.props.job.length);
+  };
+  render() {
     return (
-    <div>     
-        <h3>Busca por nome</h3>
-        <input
+      <div>
+        <FiltrosContainer>
+          <h3>Busca por nome</h3>
+          <input
             placeholder="Busca por titulo"
             value={this.props.busca}
             onChange={this.props.onChangeAtualizacaoDaBusca}
-        />
-     
-        <h3>Valor mínimo</h3>
-        <input
+          />
+          <h3>Valor mínimo</h3>
+          <input
             type="number"
             placeholder="  $"
             value={this.props.valorMinimo}
             onChange={this.props.onChangeAtualizacaoDoMinimo}
-        />
-           
-        <h3>Valor máximo</h3>
-        <input
+          />
+          <h3>Valor máximo</h3>
+          <input
             type="number"
             placeholder="  $$$$"
             value={this.props.valorMaximo}
             onChange={this.props.onChangeAtualizacaoDoMaximo}
-        />
-     
-    </div>
-
-    )
-    };
+          />
+          <select
+            value={this.state.ordem}
+            onChange={this.onChangeAtualizacaoDaOrdem}
+          >
+            <option>Sem Ordenação</option>
+            <option>Menor Valor</option>
+            <option>Maior Valor</option>
+            <option>Título</option>
+            <option>Prazo</option>
+          </select>
+        </FiltrosContainer>
+      </div>
+    );
+  }
 }
-export default Filtros;

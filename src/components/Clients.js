@@ -8,7 +8,7 @@ const JobCards = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 50%;
   height: 100%;
   border: 1px solid black;
   border-radius: 5px;
@@ -37,16 +37,16 @@ export default class Clients extends React.Component {
       "https://labeninjas.herokuapp.com/jobs";
     const config = {
       headers: {
-        Authorization: "e2190c39-7930-4db4-870b-bed0e5e4b88e",
+        Authorization: "c523c7b3-fa48-4fbe-be79-c362eadb2683",
       },
     };
     axios
       .get(url, config)
       .then((response) => {
         this.setState({ 
-          jobs: response.data
+          jobs: response.data.jobs
          });
-        console.log(response.data);
+        // console.log(response.data);
         console.log(this.state.jobs);
       })
       .catch((error) => {
@@ -56,6 +56,7 @@ export default class Clients extends React.Component {
 
 
   render() {
+    
     
     const jobcard = this.state.jobs.map((job) => {
       return (
