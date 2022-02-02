@@ -37,8 +37,10 @@ export class Header extends React.Component {
             variant="contained"
             color="primary"
             onClick={this.props.goToCart}
+
           >
             Carrinho
+            
           </Button>
         </ContentBtns>
       </ConteinerHeader>
