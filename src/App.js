@@ -8,6 +8,7 @@ import {Cart} from "./components/Cart"
 class App extends React.Component {
   state = {
     currentScreen: "home",
+    jobsOnCart: []
   };
 
   goToHome = () => {
@@ -27,6 +28,29 @@ class App extends React.Component {
     this.setState({ currentScreen: "carrinho" });
   };
 
+  addJobToCart = (job) => {
+    const newJob = [...this.state.jobsOnCart]
+    newJob.push(job)
+    this.setState({
+      jobsOnCart: newJob,
+    });
+  };
+
+  removeJobFromCart = (job) => {
+    console.log(job.id)
+    const removeItem = this.state.jobsOnCart.filter((job) => {
+      if (id !== job.id) {
+        return job;
+      }
+    });
+    const newCart = [...this.state.jobsOnCart]
+    this.setState({
+      jobsOnCart: removeItem
+      });
+  };
+
+
+
   chooseScreen = () => {
     switch (this.state.currentScreen) {
       case "home":
@@ -37,10 +61,11 @@ class App extends React.Component {
       case "prestador":
         return <PrestadorServico goToHome={this.goToHome} />;
       case "cliente":
-        return <Clients />;
+        return <Clients addJobToCart={this.addJobToCart} />;
         case "carrinho":
           return (
-            <Cart />
+            <Cart jobsOnCart={this.state.jobsOnCart}
+            removeJobFromCart={this.removeJobFromCart} />
           )
       default:
         return (
@@ -51,6 +76,7 @@ class App extends React.Component {
   };
 
   render() {
+    console.log("Adicionando job no carrinho", this.state.jobsOnCart);
     return (
       <div>
         <Header goToHome={this.goToHome} goToCart={this.goToCart}/>
