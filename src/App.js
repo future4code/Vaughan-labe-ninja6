@@ -4,11 +4,29 @@ import { Header } from "./components/Header";
 import { PrestadorServico } from "./components/PrestadorServico";
 import Clients from "./components/Clients";
 import {Cart} from "./components/Cart"
+import axios from "axios";
 
 class App extends React.Component {
   state = {
     currentScreen: "home",
+
+    cart : []
   };
+
+  addCart = (job) => {
+    axios.get(`https://labeninjas.herokuapp.com/jobs/${job.id}`, {
+      headers:{
+          Authorization: "c523c7b3-fa48-4fbe-be79-c362eadb2683",
+      }
+  }).then((response) => {
+    const idProductCart = [...this.state.cart]
+    idProductCart.push(response.data)
+      this.setState({cart : idProductCart})
+      console.log(this.state.cart)
+  }).catch((error) => {
+      console.log(error.message)
+  })
+  }
 
   goToHome = () => {
     this.setState({ currentScreen: "home" });
@@ -37,10 +55,10 @@ class App extends React.Component {
       case "prestador":
         return <PrestadorServico goToHome={this.goToHome} />;
       case "cliente":
-        return <Clients />;
+        return <Clients addCart={this.addCart}/>;
         case "carrinho":
           return (
-            <Cart />
+            <Cart  cart={this.state.cart} />
           )
       default:
         return (
@@ -53,7 +71,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Header goToHome={this.goToHome} goToCart={this.goToCart}/>
+        <Header goToHome={this.goToHome} goToCart={this.goToCart} goToHomeTitle={this.goToHome}/>
         {this.chooseScreen()}
       </div>
     );
