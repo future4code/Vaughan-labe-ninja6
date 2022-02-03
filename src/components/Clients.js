@@ -173,7 +173,7 @@ export default class Clients extends React.Component {
         <Title>
         <h1>Lista de Jobs</h1>
         </Title>
-        
+
         <ContentCards>
         
         {this.state.jobs
@@ -211,7 +211,7 @@ export default class Clients extends React.Component {
                 <h1>{job.title}</h1>
                 <p><span>Descrição: </span>{job.description}</p>
                 <p><span>Valor: </span>R$ {job.price}</p>
-                <p><span>Data limite: </span>{job.dueDate}</p>
+                <p><span>Data limite: </span>{job.dueDate.split("T")[0]}</p>
                 <Button
                 variant="contained"
                 color="primary" 
