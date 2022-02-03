@@ -9,8 +9,7 @@ import axios from "axios";
 class App extends React.Component {
   state = {
     currentScreen: "home",
-
-    cart : []
+    jobsOnCart: [],
   };
 
   addCart = (job) => {
@@ -45,30 +44,52 @@ class App extends React.Component {
     this.setState({ currentScreen: "carrinho" });
   };
 
+  addJobToCart = (job) => {
+    const newJob = [...this.state.jobsOnCart];
+    newJob.push(job);
+    this.setState({
+      jobsOnCart: newJob,
+    });
+  };
+
+  removeJobFromCart = (job) => {
+    const itemDelete = job.id
+    console.log("job selecionado delete", job);
+    
+    const removeItem = this.state.jobsOnCart.filter((job) => {
+      return job.id !== itemDelete;
+    });
+
+    this.setState({jobsOnCart: removeItem})
+    
+  };
+
   chooseScreen = () => {
     switch (this.state.currentScreen) {
       case "home":
         return (
-          <Home goToService={this.goToService} goToClient={this.goToClient}
-           />
+          <Home goToService={this.goToService} goToClient={this.goToClient} />
         );
       case "prestador":
         return <PrestadorServico goToHome={this.goToHome} />;
       case "cliente":
-        return <Clients addCart={this.addCart}/>;
-        case "carrinho":
-          return (
-            <Cart  cart={this.state.cart} />
-          )
+        return <Clients addJobToCart={this.addJobToCart} />;
+      case "carrinho":
+        return (
+          <Cart
+            jobsOnCart={this.state.jobsOnCart}
+            removeJobFromCart={this.removeJobFromCart}
+          />
+        );
       default:
         return (
           <Home goToService={this.goToService} goToClient={this.goToClient} />
         );
-       
     }
   };
 
   render() {
+    console.log("Adicionando job no carrinho", this.state.jobsOnCart);
     return (
       <div>
         <Header goToHome={this.goToHome} goToCart={this.goToCart} goToHomeTitle={this.goToHome}/>
