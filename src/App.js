@@ -4,7 +4,8 @@ import { Header } from "./components/Header";
 import { PrestadorServico } from "./components/PrestadorServico";
 import Clients from "./components/Clients";
 import {Cart} from "./components/Cart"
-
+import { MuiThemeProvider } from '@material-ui/core/styles';
+import {theme} from "./theme"
 
 class App extends React.Component {
   state = {
@@ -77,10 +78,12 @@ class App extends React.Component {
   render() {
     console.log("Adicionando job no carrinho", this.state.jobsOnCart);
     return (
+      <MuiThemeProvider theme={theme}>
       <div>
         <Header goToHome={this.goToHome} goToCart={this.goToCart} goToHomeTitle={this.goToHome}/>
         {this.chooseScreen()}
       </div>
+      </MuiThemeProvider>
     );
   }
 }

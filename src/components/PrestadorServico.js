@@ -9,9 +9,9 @@ import {Checkbox} from "@material-ui/core";
 
 const BaseCadastro = styled.div`
   background-color: #7c66c5;
-  height: 91vw;
+  height: 100vh;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
 `;
 
