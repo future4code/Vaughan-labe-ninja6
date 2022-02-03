@@ -10,6 +10,7 @@ const ConteinerHeader = styled.div`
   margin: 0;
   background-color: #f5f4fc;
   box-shadow:  3px 3px 3px #808080;
+  grid-column: 1/-1;
 
 `;
 
@@ -36,7 +37,7 @@ export class Header extends React.Component {
     return (
       <ConteinerHeader>
         <ContentTitle>
-          <Title onClick={this.props.goToHomeTitle}>LabeNinja</Title>
+          <Title onClick={this.props.goToHomeTitle}>LabeNinjas</Title>
         </ContentTitle>
         <ContentBtns>
           <Button

@@ -1,28 +1,41 @@
 import React from "react";
 import axios from "axios";
 import styled from "styled-components";
-import {Cart} from "./Cart";
 // import JobDetails from "./JobDetails";
+
+const ContentCards = styled.div`
+display: grid;
+grid-template-columns: 1fr 1fr 1fr 1fr;
+row-gap: 3rem;
+width: 100%;
+justify-items: center;
+
+
+`
 
 const JobCards = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 50%;
-  height: 100%;
+  width: 70%;
   border: 1px solid black;
-  border-radius: 5px;
+  border-radius: 1rem;
   margin: 10px;
-  padding: 10px;
+  padding: 2rem;
   background-color: #f5f5f5;
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
   cursor: pointer;
+  -ms-word-break: break-all;
+    word-break: break-all;
 
   &:hover {
     background-color: #e5e5e5;
   }
 `;
+
+
+
 
 const FilterContainer = styled.div`
   display: flex;
@@ -109,6 +122,7 @@ export default class Clients extends React.Component {
   render() {
     return (
       <div>
+        
         <FilterContainer>
           <h3>Busca por nome</h3>
           <input
@@ -146,6 +160,9 @@ export default class Clients extends React.Component {
         </FilterContainer>
 
         <h1>Lista de Jobs</h1>
+
+        <ContentCards>
+        
         {this.state.jobs
           .filter((job) => {
             return job.title
@@ -176,6 +193,7 @@ export default class Clients extends React.Component {
           })
           .map((job) => {
             return (
+              
               <JobCards>
                 <h1>{job.title}</h1>
                 <p>{job.description}</p>
@@ -186,9 +204,10 @@ export default class Clients extends React.Component {
                 </button>
                 
               </JobCards>
+              
             );
           })}
-
+</ContentCards>
         <button onClick={this.getAllJobs}>Atualizar</button>
       </div>
     );
