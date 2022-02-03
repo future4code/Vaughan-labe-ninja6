@@ -19,15 +19,10 @@ const JobCards = styled.div`
   justify-content: center;
   align-items: center;
   width: 70%;
-  border: 1px solid black;
   border-radius: 1rem;
   margin: 10px;
   padding: 2rem;
-  background-color: #f5f5f5;
-  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
-  cursor: pointer;
-  -ms-word-break: break-all;
-    word-break: break-all;
+  box-shadow:  3px 3px 3px #808080;
 
   &:hover {
     background-color: #e5e5e5;
