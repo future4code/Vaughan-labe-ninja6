@@ -3,11 +3,11 @@ import Clients from "./Clients";
 import axios from "axios";
 
 export class Cart extends React.Component {
-  getInicialState() {
-    return {
-      jobsOnCart: [],
-    };
-  }
+//   getInicialState() {
+//     return {
+//       jobsOnCart: [],
+//     };
+//   }
 
 //   removeJobFromCart = (id) => {
 //     const removeItem = this.props.jobsOnCart.filter((job) => {
@@ -18,17 +18,18 @@ export class Cart extends React.Component {
 //     return removeItem;
 //   };
 
+
   render() {
 
-    this.getInicialState();
-
-    const cartList = this.props.jobsOnCart.map((job) => {
+    // this.getInicialState();
+console.log("this.props.jobsOnCart", this.props.jobsOnCart)
+    const cartList = this.props.jobsOnCart.map((job, index) => {
       return (
-        <div key={job.id}>
+        <div key={job.id + index}>
           <h4>{job.title}</h4>
           <p>{job.description}</p>
           <p>{job.price}</p>
-          <button onClick={() => this.props.removeJobFromCart(job)}>
+          <button onClick={() => this.props.removeJobFromCart(index)}>
             Remover
           </button>
         </div>
