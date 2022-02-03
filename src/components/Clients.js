@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import styled from "styled-components";
-// import JobDetails from "./JobDetails";
+import Button from "@material-ui/core/Button";
 
 const ContentCards = styled.div`
 display: grid;
@@ -32,9 +32,20 @@ const JobCards = styled.div`
   &:hover {
     background-color: #e5e5e5;
   }
+
+  span{
+    color: #7c66c5;
+  }
 `;
 
-
+const Title = styled.h2`
+  color: #7c66c5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 1rem;
+`;
 
 
 const FilterContainer = styled.div`
@@ -159,8 +170,10 @@ export default class Clients extends React.Component {
           </select>
         </FilterContainer>
 
+        <Title>
         <h1>Lista de Jobs</h1>
-
+        </Title>
+        
         <ContentCards>
         
         {this.state.jobs
@@ -196,19 +209,21 @@ export default class Clients extends React.Component {
               
               <JobCards>
                 <h1>{job.title}</h1>
-                <p>{job.description}</p>
-                <p>{job.price}</p>
-                <p>{job.dueDate}</p>
-                <button onClick={() => this.props.addJobToCart(job)}>
+                <p><span>Descrição: </span>{job.description}</p>
+                <p><span>Valor: </span>R$ {job.price}</p>
+                <p><span>Data limite: </span>{job.dueDate}</p>
+                <Button
+                variant="contained"
+                color="primary" 
+                onClick={() => this.props.addJobToCart(job)}>
                   Adicionar ao Carrinho
-                </button>
+                </Button>
                 
               </JobCards>
               
             );
           })}
 </ContentCards>
-        <button onClick={this.getAllJobs}>Atualizar</button>
       </div>
     );
   }
