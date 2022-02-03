@@ -1,48 +1,100 @@
 import React from "react";
-import Clients from "./Clients";
-import axios from "axios";
+import styled from "styled-components";
+import Button from "@material-ui/core/Button";
+
+const JobCartCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+  border: 1px solid black;
+  border-radius: 1rem;
+  margin: 10px;
+  padding: 2rem;
+  background-color: #f5f5f5;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+  cursor: pointer;
+  -ms-word-break: break-all;
+  word-break: break-all;
+
+  &:hover {
+    background-color: #e5e5e5;
+  }
+
+  span {
+    color: #7c66c5;
+  }
+`;
+
+const CardsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+`;
+
+const Title = styled.h2`
+  color: #7c66c5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 1rem;
+`;
 
 export class Cart extends React.Component {
-//   getInicialState() {
-//     return {
-//       jobsOnCart: [],
-//     };
-//   }
-
-//   removeJobFromCart = (id) => {
-//     const removeItem = this.props.jobsOnCart.filter((job) => {
-//       if (id !== job.id) {
-//         return job;
-//       }
-//     });
-//     return removeItem;
-//   };
-
-
   render() {
-
-    // this.getInicialState();
-console.log("this.props.jobsOnCart", this.props.jobsOnCart)
+    console.log("this.props.jobsOnCart", this.props.jobsOnCart);
     const cartList = this.props.jobsOnCart.map((job, index) => {
       return (
-        <div key={job.id + index}>
-          <h4>{job.title}</h4>
-          <p>{job.description}</p>
-          <p>{job.price}</p>
-          <button onClick={() => this.props.removeJobFromCart(index)}>
+        <JobCartCard key={job.id + index}>
+          <h1>{job.title}</h1>
+          <p>
+            <span>Descrição: </span>
+            {job.description}
+          </p>
+          <p>
+            <span>Valor: </span>R$ {job.price}
+          </p>
+          <p>
+            <span>Data limite: </span>
+            {job.dueDate.split("T")[0]}
+          </p>
+          <Button
+            variant="main"
+            color="primary"
+            onClick={() => this.props.removeJobFromCart(index)}
+          >
             Remover
-          </button>
-        </div>
+          </Button>
+        </JobCartCard>
       );
     });
 
-    // const { jobsOnCart } = this.props;
-
     return (
       <div>
-        <h3>carrinho</h3>
+        <Title>
+          <h2>Carrinho</h2>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={this.props.goToClient}
+          >
+            Voltar aos serviços
+          </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={this.props.cartCheckout}
+          >
+            Contratar serviços do carrinho
+          </Button>
+        </Title>
 
-        {cartList}
+        <CardsContainer>{cartList}</CardsContainer>
       </div>
     );
   }

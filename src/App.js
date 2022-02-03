@@ -38,17 +38,26 @@ class App extends React.Component {
     this.setState({
       jobsOnCart: newJob,
     });
+    alert ("Serviço adicionado ao carrinho!")
   };
 
   removeJobFromCart = (indexToDelete) => {
-    console.log("indexToDelete selecionado do delete", indexToDelete);
+    
+    // console.log("indexToDelete selecionado do delete", indexToDelete);
     
     const removeItem = this.state.jobsOnCart.filter((job, jobIndex) => {
       return indexToDelete !== jobIndex;
     });
-
     this.setState({jobsOnCart: removeItem})
+    alert (`Serviço removido do carrinho!`)
     
+  };
+
+  cartCheckout = () => {
+    alert ("Parabéns, você solicitou a contratação de um Ninja! Agora é só aguardar o contato do prestador!")
+    this.setState({
+      jobsOnCart: [],
+    });
   };
 
   chooseScreen = () => {
@@ -66,6 +75,8 @@ class App extends React.Component {
           <Cart
             jobsOnCart={this.state.jobsOnCart}
             removeJobFromCart={this.removeJobFromCart}
+            goToClient={this.goToClient}
+            cartCheckout={this.cartCheckout}
           />
         );
       default:

@@ -1,13 +1,12 @@
 import React from "react";
 import axios from "axios";
 import styled from "styled-components";
-import { TextField } from "@material-ui/core";
-
+import { Button, TextField } from "@material-ui/core";
 import { Box } from "@material-ui/core";
 import { InputLabel } from "@material-ui/core";
-
 import { FormControl } from "@material-ui/core";
 import { NativeSelect } from "@material-ui/core";
+// import { Button } from "@material-ui/core";
 
 const ContentCards = styled.div`
 display: grid;
@@ -23,19 +22,29 @@ const JobCards = styled.div`
   justify-content: center;
   align-items: center;
   width: 70%;
-  border: 1px solid black;
   border-radius: 1rem;
   margin: 10px;
   padding: 2rem;
-  background-color: #f5f5f5;
-  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
-  cursor: pointer;
+  box-shadow: 3px 3px 3px #808080;
   -ms-word-break: break-all;
   word-break: break-all;
 
   &:hover {
     background-color: #e5e5e5;
   }
+
+  span {
+    color: #7c66c5;
+  }
+`;
+
+const Title = styled.h2`
+  color: #7c66c5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 1rem;
 `;
 
 const FilterContainer = styled.div`
@@ -86,7 +95,7 @@ export default class Clients extends React.Component {
         console.log(error);
       });
   };
-  PonChangeAtualizacaoDaBusca = (event) => {
+  onChangeAtualizacaoDaBusca = (event) => {
     this.setState({
       query: event.target.value,
     });
@@ -169,7 +178,9 @@ export default class Clients extends React.Component {
           </Box>
         </FilterContainer>
 
-        <h1>Lista de Jobs</h1>
+        <Title>
+          <h1>Lista de Jobs</h1>
+        </Title>
 
         <ContentCards>
           {this.state.jobs
@@ -204,17 +215,27 @@ export default class Clients extends React.Component {
               return (
                 <JobCards>
                   <h1>{job.title}</h1>
-                  <p>{job.description}</p>
-                  <p>{job.price}</p>
-                  <p>{job.dueDate}</p>
-                  <button onClick={() => this.props.addJobToCart(job)}>
+                  <p>
+                    <span>Descrição: </span>
+                    {job.description}
+                  </p>
+                  <p>
+                    <span>Valor: </span>R$ {job.price}
+                  </p>
+                  <p>
+                    <span>Data limite: </span>
+                    {job.dueDate.split("T")[0]}
+                  </p>
+                  <Button
+                    variant="outlined"
+                    onClick={() => this.props.addJobToCart(job)}
+                  >
                     Adicionar ao Carrinho
-                  </button>
+                  </Button>
                 </JobCards>
               );
             })}
         </ContentCards>
-        <button onClick={this.getAllJobs}>Atualizar</button>
       </div>
     );
   }
