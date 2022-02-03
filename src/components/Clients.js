@@ -23,6 +23,8 @@ const JobCards = styled.div`
   margin: 10px;
   padding: 2rem;
   box-shadow:  3px 3px 3px #808080;
+  -ms-word-break: break-all;
+    word-break: break-all;
 
   &:hover {
     background-color: #e5e5e5;
@@ -207,9 +209,7 @@ export default class Clients extends React.Component {
                 <p><span>Descrição: </span>{job.description}</p>
                 <p><span>Valor: </span>R$ {job.price}</p>
                 <p><span>Data limite: </span>{job.dueDate.split("T")[0]}</p>
-                <Button
-                variant="contained"
-                color="primary" 
+                <Button variant="outlined"
                 onClick={() => this.props.addJobToCart(job)}>
                   Adicionar ao Carrinho
                 </Button>
