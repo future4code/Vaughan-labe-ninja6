@@ -7,9 +7,10 @@ const ConteinerHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border: 1px solid black;
   margin: 0;
-  background-color: grey;
+  background-color: #f5f4fc;
+  box-shadow:  3px 3px 3px #808080;
+
 `;
 
 const ContentBtns = styled.div`
@@ -18,13 +19,25 @@ const ContentBtns = styled.div`
   column-gap: 2rem;
   padding: 0 1rem;
 `;
+
+const ContentTitle = styled.div`
+padding: 0 1rem;
+`
+
+const Title = styled.h1`
+color: #7c66c5;
+font-weight: 800;
+&:hover {
+    cursor: pointer;
+  }
+`
 export class Header extends React.Component {
   render() {
     return (
       <ConteinerHeader>
-        <div>
-          <h1>LabeNinjas</h1>
-        </div>
+        <ContentTitle>
+          <Title onClick={this.props.goToHomeTitle}>LabeNinja</Title>
+        </ContentTitle>
         <ContentBtns>
           <Button
             onClick={this.props.goToHome}

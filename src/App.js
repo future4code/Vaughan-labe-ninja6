@@ -3,13 +3,29 @@ import { Home } from "./components/Home";
 import { Header } from "./components/Header";
 import { PrestadorServico } from "./components/PrestadorServico";
 import Clients from "./components/Clients";
-import { Cart } from "./components/Cart";
+import {Cart} from "./components/Cart"
+import axios from "axios";
 
 class App extends React.Component {
   state = {
     currentScreen: "home",
     jobsOnCart: [],
   };
+
+  addCart = (job) => {
+    axios.get(`https://labeninjas.herokuapp.com/jobs/${job.id}`, {
+      headers:{
+          Authorization: "c523c7b3-fa48-4fbe-be79-c362eadb2683",
+      }
+  }).then((response) => {
+    const idProductCart = [...this.state.cart]
+    idProductCart.push(response.data)
+      this.setState({cart : idProductCart})
+      console.log(this.state.cart)
+  }).catch((error) => {
+      console.log(error.message)
+  })
+  }
 
   goToHome = () => {
     this.setState({ currentScreen: "home" });
@@ -76,7 +92,7 @@ class App extends React.Component {
     console.log("Adicionando job no carrinho", this.state.jobsOnCart);
     return (
       <div>
-        <Header goToHome={this.goToHome} goToCart={this.goToCart} />
+        <Header goToHome={this.goToHome} goToCart={this.goToCart} goToHomeTitle={this.goToHome}/>
         {this.chooseScreen()}
       </div>
     );
