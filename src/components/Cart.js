@@ -61,7 +61,7 @@ export class Cart extends React.Component {
           </p>
           <p>
             <span>Data limite: </span>
-            {job.dueDate}
+            {job.dueDate.split("T")[0]}
           </p>
           <Button
             variant="main"
@@ -85,16 +85,14 @@ export class Cart extends React.Component {
           >
             Voltar aos serviços
           </Button>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={this.props.cartCheckout}
-        >
-          Contratar serviços do carrinho
-        </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={this.props.cartCheckout}
+          >
+            Contratar serviços do carrinho
+          </Button>
         </Title>
-        
-        
 
         <CardsContainer>{cartList}</CardsContainer>
       </div>
