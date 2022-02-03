@@ -3,12 +3,12 @@ import { Home } from "./components/Home";
 import { Header } from "./components/Header";
 import { PrestadorServico } from "./components/PrestadorServico";
 import Clients from "./components/Clients";
-import {Cart} from "./components/Cart"
+import { Cart } from "./components/Cart";
 
 class App extends React.Component {
   state = {
     currentScreen: "home",
-    jobsOnCart: []
+    jobsOnCart: [],
   };
 
   goToHome = () => {
@@ -29,49 +29,46 @@ class App extends React.Component {
   };
 
   addJobToCart = (job) => {
-    const newJob = [...this.state.jobsOnCart]
-    newJob.push(job)
+    const newJob = [...this.state.jobsOnCart];
+    newJob.push(job);
     this.setState({
       jobsOnCart: newJob,
     });
   };
 
   removeJobFromCart = (job) => {
-    console.log(job.id)
+    const itemDelete = job.id
+    console.log("job selecionado delete", job);
+    
     const removeItem = this.state.jobsOnCart.filter((job) => {
-      if (id !== job.id) {
-        return job;
-      }
+      return job.id !== itemDelete;
     });
-    const newCart = [...this.state.jobsOnCart]
-    this.setState({
-      jobsOnCart: removeItem
-      });
+
+    this.setState({jobsOnCart: removeItem})
+    
   };
-
-
 
   chooseScreen = () => {
     switch (this.state.currentScreen) {
       case "home":
         return (
-          <Home goToService={this.goToService} goToClient={this.goToClient}
-           />
+          <Home goToService={this.goToService} goToClient={this.goToClient} />
         );
       case "prestador":
         return <PrestadorServico goToHome={this.goToHome} />;
       case "cliente":
         return <Clients addJobToCart={this.addJobToCart} />;
-        case "carrinho":
-          return (
-            <Cart jobsOnCart={this.state.jobsOnCart}
-            removeJobFromCart={this.removeJobFromCart} />
-          )
+      case "carrinho":
+        return (
+          <Cart
+            jobsOnCart={this.state.jobsOnCart}
+            removeJobFromCart={this.removeJobFromCart}
+          />
+        );
       default:
         return (
           <Home goToService={this.goToService} goToClient={this.goToClient} />
         );
-       
     }
   };
 
@@ -79,7 +76,7 @@ class App extends React.Component {
     console.log("Adicionando job no carrinho", this.state.jobsOnCart);
     return (
       <div>
-        <Header goToHome={this.goToHome} goToCart={this.goToCart}/>
+        <Header goToHome={this.goToHome} goToCart={this.goToCart} />
         {this.chooseScreen()}
       </div>
     );

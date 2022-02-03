@@ -9,17 +9,16 @@ export class Cart extends React.Component {
     };
   }
 
-  removeJobFromCart = (id) => {
-    const removeItem = this.props.jobsOnCart.filter((job) => {
-      if (id !== job.id) {
-        return job;
-      }
-    });
-    return removeItem;
-  };
+//   removeJobFromCart = (id) => {
+//     const removeItem = this.props.jobsOnCart.filter((job) => {
+//       if (id !== job.id) {
+//         return job;
+//       }
+//     });
+//     return removeItem;
+//   };
 
   render() {
-    console.log(this.props.jobsOnCart);
 
     this.getInicialState();
 
