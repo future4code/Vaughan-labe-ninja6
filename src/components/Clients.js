@@ -31,6 +31,7 @@ const JobCards = styled.div`
 `;
 
 
+
 const FilterContainer = styled.div`
   display: flex;
   flex-direction: row;
