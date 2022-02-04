@@ -11,6 +11,9 @@ const ConteinerHeader = styled.div`
   background-color: #f5f4fc;
   box-shadow:  3px 3px 3px #808080;
   grid-column: 1/-1;
+  @media (max-width: 600px) {
+    flex-wrap:wrap;
+  }
 
 `;
 

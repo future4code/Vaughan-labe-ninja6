@@ -25,6 +25,7 @@ const JobCards = styled.div`
   margin-left: 0.2rem;
   -ms-word-break: break-all;
   word-break: break-all;
+  
 `;
 const FilterContainer = styled.div`
   display: flex;
@@ -38,6 +39,12 @@ const FilterContainer = styled.div`
   margin: 10px;
   padding: 10px;
   background-color: #f5f4fc;
+  flex-grow: 1;
+  
+  @media (max-width:600px) {
+  flex-wrap: wrap;
+  
+}
   /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
 `;
 const CardStyle = styled.div`
@@ -52,6 +59,9 @@ const ContentSection = styled.div`
   row-gap: 0.2rem;
   column-gap: 1rem;
   min-height: 100vh;
+  @media(max-width:600px) {
+    grid-template-columns: 1fr;
+  }
 `;
 const Descricao = styled.p`
   -ms-word-break: break-all;
@@ -173,8 +183,8 @@ export default class Clients extends React.Component {
                 <AccordionDetails>
                   <Typography>
                     <p>Data limite: {job.dueDate.split("T")[0]}</p>
-                    <h2>Preço: R$ {job.price}</h2>
-                    <p>Métodos de pagamento: <button>{job.paymentMethods}</button></p>
+                    <h2>Preço: R$ {job.price},00</h2>
+                    <p>Métodos de pagamento: {job.paymentMethods.join(" / ")}</p>
                   </Typography>
                 </AccordionDetails>
               </Accordion>
