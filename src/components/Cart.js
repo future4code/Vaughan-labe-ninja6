@@ -33,10 +33,11 @@ const CardStyle = styled.div`
 
 const ContentSection = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: 1fr;
   row-gap: 0.2rem;
   column-gap: 1rem;
   min-height: 100vh;
+  
 `;
 
 const Descricao = styled.p`
