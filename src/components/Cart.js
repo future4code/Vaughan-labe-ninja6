@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Button from "@material-ui/core/Button";
+import { red } from "@material-ui/core/colors";
 
 const JobCartCard = styled.div`
   display: flex;
@@ -8,13 +9,10 @@ const JobCartCard = styled.div`
   justify-content: center;
   align-items: center;
   width: 70%;
-  border: 1px solid black;
   border-radius: 1rem;
   margin: 10px;
   padding: 2rem;
-  background-color: #f5f5f5;
-  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
-  cursor: pointer;
+  box-shadow: 3px 3px 3px #808080;
   -ms-word-break: break-all;
   word-break: break-all;
 
@@ -28,12 +26,11 @@ const JobCartCard = styled.div`
 `;
 
 const CardsContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
+ display: grid;
+grid-template-columns: 1fr 1fr 1fr 1fr;
+row-gap: 3rem;
+width: 100%;
+justify-items: center;0
 `;
 
 const Title = styled.h2`
@@ -44,6 +41,9 @@ const Title = styled.h2`
   width: 100%;
   gap: 1rem;
 `;
+
+
+
 
 export class Cart extends React.Component {
   render() {
@@ -64,8 +64,8 @@ export class Cart extends React.Component {
             {job.dueDate.split("T")[0]}
           </p>
           <Button
-            variant="main"
-            color="primary"
+            variant="contained" 
+            style = {{color:'red'}}
             onClick={() => this.props.removeJobFromCart(index)}
           >
             Remover

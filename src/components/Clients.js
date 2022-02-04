@@ -25,12 +25,12 @@ const JobCards = styled.div`
   border-radius: 1rem;
   margin: 10px;
   padding: 2rem;
-  box-shadow: 3px 3px 3px #808080;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
   -ms-word-break: break-all;
   word-break: break-all;
 
   &:hover {
-    background-color: #e5e5e5;
+    background-color: #f2f2f2;
   }
 
   span {
@@ -132,16 +132,16 @@ export default class Clients extends React.Component {
           <TextField
             id="outlined-basic"
             label="Filtrar por Titilo"
-            variant="outlined"
+            variant="standard"
             placeholder="Busca por titulo"
             value={this.state.query}
             onChange={this.onChangeAtualizacaoDaBusca}
           />
 
           <TextField
-            id="outlined-basic"
+            id="standard-basic"
             label="Filtrar por Valor Mínimo"
-            variant="outlined"
+            variant="standard"
             type="number"
             placeholder="  $"
             value={this.state.minValue}
@@ -149,9 +149,9 @@ export default class Clients extends React.Component {
           />
 
           <TextField
-            id="outlined-basic"
+            id="standard-basic"
             label="Filtrar por Valor Máximo"
-            variant="outlined"
+            variant="standard"
             type="number"
             placeholder="  $$$$"
             value={this.state.maxValue}
@@ -209,6 +209,7 @@ export default class Clients extends React.Component {
                   return a.title.localeCompare(b.title);
                 case "Prazo":
                   return a.dueDate.localeCompare(b.dueDate);
+                  default:
               }
             })
             .map((job) => {
@@ -227,7 +228,7 @@ export default class Clients extends React.Component {
                     {job.dueDate.split("T")[0]}
                   </p>
                   <Button
-                    variant="outlined"
+                    variant="contained"
                     onClick={() => this.props.addJobToCart(job)}
                   >
                     Adicionar ao Carrinho

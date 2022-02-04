@@ -123,19 +123,19 @@ export class PrestadorServico extends Component {
           
           <H2> Cadastre seu Serviço ou Produto </H2>
           
-          <TextField id="outlined-basic" label="Titilo" variant="outlined"
+          <TextField id="standard-basic" label="Titulo" variant="standard"
             value={this.state.titulo}
             onChange={this.manusearTitulo}
           /> 
           <br/>
 
-          <TextField id="outlined-basic" label="Descrição" variant="outlined"
+          <TextField id="standard-basic" label="Descrição" variant="standard"
             value={this.state.descricao}
             onChange={this.manusearDescricao}
           />
           <br/>
 
-          <TextField id="outlined-basic" label=" Valor a ser cobrado " variant="outlined"
+          <TextField id="standard-basic" label=" Valor a ser cobrado " variant="standard"
           type="number"
             value={this.state.preco}
             onChange={this.manusearPreco}
