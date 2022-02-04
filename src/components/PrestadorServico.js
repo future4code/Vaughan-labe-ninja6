@@ -123,19 +123,19 @@ export class PrestadorServico extends Component {
           
           <H2> Cadastre seu Serviço ou Produto </H2>
           
-          <TextField id="standard-basic" label="Titulo" variant="standard"
+          <TextField id="outlined-basic" label="Titilo" variant="outlined"
             value={this.state.titulo}
             onChange={this.manusearTitulo}
           /> 
           <br/>
 
-          <TextField id="standard-basic" label="Descrição" variant="standard"
+          <TextField id="outlined-basic" label="Descrição" variant="outlined"
             value={this.state.descricao}
             onChange={this.manusearDescricao}
           />
           <br/>
 
-          <TextField id="standard-basic" label=" Valor a ser cobrado " variant="standard"
+          <TextField id="outlined-basic" label=" Valor a ser cobrado " variant="outlined"
           type="number"
             value={this.state.preco}
             onChange={this.manusearPreco}
@@ -150,11 +150,11 @@ export class PrestadorServico extends Component {
 
         >
         
-        <FormControlLabel option value="PIX" control={<Checkbox defaultChecked color="primary" />}  label="Pix"  />
-        <FormControlLabel option value="PAYPAL" control={<Checkbox defaultChecked color="primary" />} label="PayPal" />
-        <FormControlLabel option value="DEBITO" control={<Checkbox defaultChecked color="primary" />} label="Debito" />
-        <FormControlLabel option value="CRÉDITO" control={<Checkbox defaultChecked color="primary" />} label="Crédito" />
-        <FormControlLabel option value="BOLETO" control={<Checkbox defaultChecked color="primary" />} label="Boleto" />
+        <FormControlLabel option value="pix" control={<Checkbox  color="primary" />}  label="Pix"  />
+        <FormControlLabel option value="paypal" control={<Checkbox  color="primary" />} label="PayPal" />
+        <FormControlLabel option value="debito" control={<Checkbox  color="primary" />} label="Debito" />
+        <FormControlLabel option value="credito" control={<Checkbox  color="primary" />} label="Crédito" />
+        <FormControlLabel option value="boleto" control={<Checkbox  color="primary" />} label="Boleto" />
 
         </SeletorPagamento>
         
