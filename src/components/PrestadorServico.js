@@ -26,6 +26,7 @@ const CardCadastro = styled.div`
   padding: 50px;
   text-align: center;
   background-color: white;
+ 
 `;
 
 const H2 = styled.h2`
@@ -43,11 +44,11 @@ const SeletorPagamento = styled.div`
 
 `
 const InputData = styled.input`
-  background-color: #3F51B5;
-  border: 1px solid #666666;
+  background-color: white;
+  border: 1px solid #C4C4C4;
   border-radius: 3px;
   margin-bottom: 20px;
-  color: white;
+  color: #7C66C5;
   text-align: center;
   padding: 3px;
 `
@@ -121,7 +122,7 @@ export class PrestadorServico extends Component {
       <BaseCadastro>
         <CardCadastro>
           
-          <H2> Cadastre seu Serviço ou Produto </H2>
+          <H2> Cadastre o seu Serviço </H2>
           
           <TextField id="outlined-basic" label="Titilo" variant="outlined"
             value={this.state.titulo}
