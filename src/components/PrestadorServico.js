@@ -150,11 +150,11 @@ export class PrestadorServico extends Component {
 
         >
         
-        <FormControlLabel option value="PIX" control={<Checkbox defaultChecked color="primary" />}  label="Pix"  />
-        <FormControlLabel option value="PAYPAL" control={<Checkbox defaultChecked color="primary" />} label="PayPal" />
-        <FormControlLabel option value="DEBITO" control={<Checkbox defaultChecked color="primary" />} label="Debito" />
-        <FormControlLabel option value="CRÉDITO" control={<Checkbox defaultChecked color="primary" />} label="Crédito" />
-        <FormControlLabel option value="BOLETO" control={<Checkbox defaultChecked color="primary" />} label="Boleto" />
+        <FormControlLabel option value="pix" control={<Checkbox  color="primary" />}  label="Pix"  />
+        <FormControlLabel option value="paypal" control={<Checkbox  color="primary" />} label="PayPal" />
+        <FormControlLabel option value="debito" control={<Checkbox  color="primary" />} label="Debito" />
+        <FormControlLabel option value="credito" control={<Checkbox  color="primary" />} label="Crédito" />
+        <FormControlLabel option value="boleto" control={<Checkbox  color="primary" />} label="Boleto" />
 
         </SeletorPagamento>
         
