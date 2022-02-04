@@ -8,40 +8,42 @@ import { AccordionDetails } from "@material-ui/core";
 import { Card } from "@material-ui/core";
 import { CardContent } from "@material-ui/core";
 import { Grid } from "@material-ui/core";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
-// const JobCartCard = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   align-items: center;
-//   width: 70%;
-//   border: 1px solid black;
-//   border-radius: 1rem;
-//   margin: 10px;
-//   padding: 2rem;
-//   background-color: #f5f5f5;
-//   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
-//   cursor: pointer;
-//   -ms-word-break: break-all;
-//   word-break: break-all;
+const ContentCards = styled.div`
+  width: 100%;
+  justify-items: center;
+`;
 
-//   &:hover {
-//     background-color: #e5e5e5;
-//   }
+const JobCards = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-left: 0.2rem;
+  -ms-word-break: break-all;
+  word-break: break-all;
+`;
 
-//   span {
-//     color: #7c66c5;
-//   }
-// `;
+const CardStyle = styled.div`
+  display: flex;
+  flex-direction: column;
+  -ms-word-break: break-all;
+  word-break: break-all;
+`;
 
-// const CardsContainer = styled.div`
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: center;
-//   align-items: center;
-//   width: 100%;
-//   height: 100%;
-// `;
+const ContentSection = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  row-gap: 0.2rem;
+  column-gap: 1rem;
+  min-height: 100vh;
+`;
+
+const Descricao = styled.p`
+  -ms-word-break: break-all;
+  word-break: break-all;
+`;
+
 
 const Title = styled.h2`
   color: #7c66c5;
@@ -57,31 +59,42 @@ export class Cart extends React.Component {
     console.log("this.props.jobsOnCart", this.props.jobsOnCart);
     const cartList = this.props.jobsOnCart.map((job, index) => {
       return (
-        <CardContent
-        key={job.id + index}>
-          <Accordion>
-                    <AccordionSummary expandIcon={<div>V</div>}>
+        <ContentCards>
+            <JobCards>
+              <Accordion>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel2a-content"
+                  id="panel2a-header"
+                >
+                  <CardStyle>
+                    <div>
                       <Typography>
                         <h2>{job.title}</h2>
-                        <p>{job.description}</p>
+                        <Descricao>{job.description}</Descricao>
                       </Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <Typography>
-                        <p>Data limite: {job.dueDate.split("T")[0]}</p>
-                        <h2>Preço: R$ {job.price}</h2>
-                        <p>Métodos de pagamento: {job.paymentMethods}</p>
-                      </Typography>
-                    </AccordionDetails>
-                  </Accordion>
-                  <Button
-            variant="main"
-            color="primary"
-            onClick={() => this.props.removeJobFromCart(index)}
-          >
-            Remover
-          </Button>
-        </CardContent>
+                    </div>
+                    <div>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={() => this.props.addJobToCart(job)}
+                      >
+                        Adicionar ao Carrinho
+                      </Button>
+                    </div>
+                  </CardStyle>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Typography>
+                    <p>Data limite: {job.dueDate.split("T")[0]}</p>
+                    <h2>Preço: R$ {job.price}</h2>
+                    <p>Métodos de pagamento: {job.paymentMethods}</p>
+                  </Typography>
+                </AccordionDetails>
+              </Accordion>
+            </JobCards>
+          </ContentCards>
         
       );
     });
@@ -106,7 +119,7 @@ export class Cart extends React.Component {
           </Button>
         </Title>
 
-        <Card>{cartList}</Card>
+        <ContentSection>{cartList}</ContentSection>
       </div>
     );
   }
