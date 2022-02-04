@@ -78,9 +78,9 @@ export class Cart extends React.Component {
                       <Button
                         variant="contained"
                         color="primary"
-                        onClick={() => this.props.addJobToCart(job)}
+                        onClick={() => this.props.removeJobFromCart(index)}
                       >
-                        Adicionar ao Carrinho
+                        Remover
                       </Button>
                     </div>
                   </CardStyle>
