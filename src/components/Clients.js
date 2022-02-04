@@ -10,48 +10,26 @@ import { Typography } from "@material-ui/core";
 import { Accordion } from "@material-ui/core";
 import { AccordionSummary } from "@material-ui/core";
 import { AccordionDetails } from "@material-ui/core";
-import { Card } from "@material-ui/core";
-import { CardContent } from "@material-ui/core";
-import { Grid } from "@material-ui/core";
+// import { Card } from "@material-ui/core";
+// import { CardContent } from "@material-ui/core";
 
-// const ContentCards = styled.div`
-// display: grid;
-// grid-template-columns: 1fr 1fr 1fr 1fr;
-// row-gap: 3rem;
-// /* width: 100%; */
-// justify-items: center;
-// `;
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+// import { Grid } from "@material-ui/core";
 
-// const JobCards = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   align-items: center;
-//   width: 70%;
-//   border-radius: 1rem;
-//   margin: 10px;
-//   padding: 2rem;
-//   box-shadow: 3px 3px 3px #808080;
-//   -ms-word-break: break-all;
-//   word-break: break-all;
-
-//   &:hover {
-//     background-color: #e5e5e5;
-//   }
-
-//   span {
-//     color: #7c66c5;
-//   }
-// `;
-
-const Title = styled.h2`
-  color: #7c66c5;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+const ContentCards = styled.div`
   width: 100%;
-  gap: 1rem;
+  justify-items: center;
 `;
+
+const JobCards = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-left: 0.2rem;
+  -ms-word-break: break-all;
+  word-break: break-all;
+`;
+
 
 const FilterContainer = styled.div`
   display: flex;
@@ -66,6 +44,26 @@ const FilterContainer = styled.div`
   padding: 10px;
   background-color: #f5f4fc;
   /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+`;
+
+const CardStyle = styled.div`
+  display: flex;
+  flex-direction: column;
+  -ms-word-break: break-all;
+  word-break: break-all;
+`;
+
+const ContentSection = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  row-gap: 0.2rem;
+  column-gap: 1rem;
+  min-height: 100vh;
+`;
+
+const Descricao = styled.p`
+  -ms-word-break: break-all;
+  word-break: break-all;
 `;
 
 export default class Clients extends React.Component {
@@ -94,7 +92,6 @@ export default class Clients extends React.Component {
         this.setState({
           jobs: response.data.jobs,
         });
-        // console.log(response.data);
         console.log(this.state.jobs);
       })
       .catch((error) => {
@@ -138,12 +135,74 @@ export default class Clients extends React.Component {
   };
 
   render() {
+    const cardList = this.state.jobs
+      .filter((job) => {
+        return job.title.toLowerCase().includes(this.state.query.toLowerCase());
+      })
+      .filter((job) => {
+        return this.state.minValue === "" || job.price >= this.state.minValue;
+      })
+      .filter((job) => {
+        return this.state.maxValue === "" || job.price <= this.state.maxValue;
+      })
+      .sort((a, b) => {
+        switch (this.state.ordem) {
+          case "Menor Valor":
+            return a.price - b.price;
+          case "Maior Valor":
+            return b.price - a.price;
+          case "Título":
+            return a.title.localeCompare(b.title);
+          case "Prazo":
+            return a.dueDate.localeCompare(b.dueDate);
+        }
+      })
+      .map((job) => {
+        return (
+          <ContentCards>
+            <JobCards>
+              <Accordion>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel2a-content"
+                  id="panel2a-header"
+                >
+                  <CardStyle>
+                    <div>
+                      <Typography>
+                        <h2>{job.title}</h2>
+                        <Descricao>{job.description}</Descricao>
+                      </Typography>
+                    </div>
+                    <div>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={() => this.props.addJobToCart(job)}
+                      >
+                        Adicionar ao Carrinho
+                      </Button>
+                    </div>
+                  </CardStyle>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Typography>
+                    <p>Data limite: {job.dueDate.split("T")[0]}</p>
+                    <h2>Preço: R$ {job.price}</h2>
+                    <p>Métodos de pagamento: {job.paymentMethods}</p>
+                  </Typography>
+                </AccordionDetails>
+              </Accordion>
+            </JobCards>
+          </ContentCards>
+        );
+      });
     return (
       <div>
         <FilterContainer>
           <TextField
             id="outlined-basic"
-            label="Filtrar por Titilo"
+            label="Pesquisar serviço"
             variant="outlined"
             placeholder="Busca por titulo"
             value={this.state.query}
@@ -190,68 +249,10 @@ export default class Clients extends React.Component {
           </Box>
         </FilterContainer>
 
-        <Title>
+        {/* <Title>
           <h1>Lista de Ninjas</h1>
-        </Title>
-
-        <Card variant="outlined" color="primary">
-          {this.state.jobs
-            .filter((job) => {
-              return job.title
-                .toLowerCase()
-                .includes(this.state.query.toLowerCase());
-            })
-            .filter((job) => {
-              return (
-                this.state.minValue === "" || job.price >= this.state.minValue
-              );
-            })
-            .filter((job) => {
-              return (
-                this.state.maxValue === "" || job.price <= this.state.maxValue
-              );
-            })
-            .sort((a, b) => {
-              switch (this.state.ordem) {
-                case "Menor Valor":
-                  return a.price - b.price;
-                case "Maior Valor":
-                  return b.price - a.price;
-                case "Título":
-                  return a.title.localeCompare(b.title);
-                case "Prazo":
-                  return a.dueDate.localeCompare(b.dueDate);
-              }
-            })
-            .map((job) => {
-              return (
-                <CardContent>
-                  <Accordion>
-                    <AccordionSummary expandIcon={<div>V</div>}>
-                      <Typography>
-                        <h2>{job.title}</h2>
-                        <p>{job.description}</p>
-                      </Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <Typography>
-                        <p>Data limite: {job.dueDate.split("T")[0]}</p>
-                        <h2>Preço: R$ {job.price}</h2>
-                        <p>Métodos de pagamento: {job.paymentMethods}</p>
-                      </Typography>
-                    </AccordionDetails>
-                  </Accordion>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={() => this.props.addJobToCart(job)}
-                  >
-                    Adicionar ao Carrinho
-                  </Button>
-                </CardContent>
-              );
-            })}
-        </Card>
+        </Title> */}
+        <ContentSection>{cardList}</ContentSection>
       </div>
     );
   }
