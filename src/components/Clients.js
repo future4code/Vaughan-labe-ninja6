@@ -183,8 +183,13 @@ export default class Clients extends React.Component {
                 <AccordionDetails>
                   <Typography>
                     <p>Data limite: {job.dueDate.split("T")[0]}</p>
-                    <h2>Preço: R$ {job.price},00</h2>
-                    <p>Métodos de pagamento: {job.paymentMethods.join(" / ")}</p>
+
+                    <h2>Preço: R$ {job.price}</h2>
+                    <p>Métodos de pagamento: {job.paymentMethods.join(" ")}</p>
+                      
+                      
+                    
+
                   </Typography>
                 </AccordionDetails>
               </Accordion>

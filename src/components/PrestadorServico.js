@@ -23,6 +23,7 @@ const CardCadastro = styled.div`
   padding: 50px;
   text-align: center;
   background-color: white;
+ 
 `;
 const H2 = styled.h2`
   color:#7c66c5;
@@ -102,7 +103,11 @@ export class PrestadorServico extends Component {
     return (
       <BaseCadastro>
         <CardCadastro>
+
+          
           <H2> Cadastre o seu Serviço </H2>
+          
+
           <TextField id="outlined-basic" label="Titilo" variant="outlined"
             value={this.state.titulo}
             onChange={this.manusearTitulo}
@@ -123,11 +128,15 @@ export class PrestadorServico extends Component {
         value={this.state.tiposDePagamentos}
         onChange={this.manusearFormaPagamento}
         >
-        <FormControlLabel option value="pix" control={<Checkbox  color="primary" />}  label="Pix"  />
-        <FormControlLabel option value="paypal" control={<Checkbox  color="primary" />} label="PayPal" />
-        <FormControlLabel option value="debito" control={<Checkbox  color="primary" />} label="Debito" />
-        <FormControlLabel option value="credito" control={<Checkbox  color="primary" />} label="Crédito" />
-        <FormControlLabel option value="boleto" control={<Checkbox  color="primary" />} label="Boleto" />
+
+        
+        <FormControlLabel option value="Pix /" control={<Checkbox  color="primary" />}  label="Pix"  />
+        <FormControlLabel option value="Paypal /" control={<Checkbox  color="primary" />} label="PayPal" />
+        <FormControlLabel option value="Debito /" control={<Checkbox  color="primary" />} label="Debito" />
+        <FormControlLabel option value="Credito /" control={<Checkbox  color="primary" />} label="Crédito" />
+        <FormControlLabel option value="Boleto /" control={<Checkbox  color="primary" />} label="Boleto" />
+
+
         </SeletorPagamento>
         <H4> Data limite para que vença sua proposta. </H4>
           <InputData
